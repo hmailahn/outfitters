@@ -14,9 +14,9 @@ Footwear.init(
         description: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isAlphanumeric
-            }
+            // validate: {
+            //     isAlphanumeric
+            // }
         },
         wardrobe_id: {
             type: DataTypes.INTEGER,
