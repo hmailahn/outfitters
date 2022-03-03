@@ -1,0 +1,1 @@
+CREATE DATABASE outfitters_db;
