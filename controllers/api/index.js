@@ -13,6 +13,6 @@ router.use('/footwear', footwearRoutes);
 router.use('/legwear', legwearRoutes);
 router.use('/outfit', outfitRoutes);
 router.use('/wardrobe', wardrobeRoutes);
-router.use('/user', userRoutes);
+router.use('/users', userRoutes);
 
 module.exports = router;
