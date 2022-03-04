@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Chestwear, Legwear, Footwear, Wardrobe, Outfit } = require("../../models");
+const { User, Wardrobe, Clothing } = require("../../models");
 
 router.get("/", (req, res) => {
     User.findAll({
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
       include: [
         {
           model: Wardrobe,
-          attributes: ["id", "clothing"],
+          attributes: ["id"],
         }
       ]
     })
