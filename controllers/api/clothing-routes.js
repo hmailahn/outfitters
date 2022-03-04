@@ -17,8 +17,10 @@ router.get('/', withAuth, (req, res) => {
       });
   });
 
-///trying to get just shirts for user, not sure how to go about it
+///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
   router.get('/shirts', withAuth, (req, res) => {
+   console.log('test');
+   
     if (req.session) {
     Clothing.findAll({
       where: {
@@ -27,7 +29,7 @@ router.get('/', withAuth, (req, res) => {
       attributes:[
         'id',
         'description'
-      [sequelize.literal('SELECT * FROM clothing WHERE type = shirt'), 'shirt']
+      [sequelize.literal('(SELECT * FROM clothing WHERE type = ?)'), 'type']
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
