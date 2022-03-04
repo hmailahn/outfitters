@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
       include: [
         {
           model: Wardrobe,
-          attributes: ["id", "outfit", "chestwear", "legwear", "footwear"],
+          attributes: ["id", "clothing"],
         }
       ]
     })
