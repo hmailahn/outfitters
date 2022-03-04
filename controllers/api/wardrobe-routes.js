@@ -2,8 +2,13 @@ const router = require('express').Router();
 const { User, Wardrobe } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', (req, res) => {
-    Wardrobe.findAll()
+//get all wardrobe from user logged in
+router.get('/', withAuth, (req, res) => {
+    Wardrobe.findAll({
+        where: {
+            user_id: req.session.user_id
+          },
+    })
       .then(dbWardrobeData => res.json(dbWardrobeData))
       .catch(err => {
         console.log(err);
@@ -11,6 +16,7 @@ router.get('/', (req, res) => {
       });
   });
 
+//create a wardrobe, attach to a user_id
 router.post('/', (req, res) => {
     Wardrobe.create({
         user_id: req.body.user_id
