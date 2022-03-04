@@ -1,10 +1,15 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection')
 const { User, Clothing, Wardrobe } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-//find all clothes, i don't think we will necessarily need this
-router.get('/', (req, res) => {
-    Clothing.findAll()
+//find all clothes for user logged in session by using wardrobe_id
+router.get('/', withAuth, (req, res) => {
+    Clothing.findAll({
+      where: {
+        wardrobe_id: req.session.user_id
+      },
+    })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
         console.log(err);
@@ -12,41 +17,29 @@ router.get('/', (req, res) => {
       });
   });
 
-//find clothing by id- this is only for clothing id
-  router.get('/:id', (req, res) => {
-    Clothing.findOne({
+///trying to get just shirts for user, not sure how to go about it
+  router.get('/shirts', withAuth, (req, res) => {
+    if (req.session) {
+    Clothing.findAll({
       where: {
-        id: req.params.id
+        wardrobe_id: req.session.user_id
       },
-      attributes: [
+      attributes:[
         'id',
-        'description',
-        'type',
-        'wardrobe_id'
-      ],
-      include: [
-        {
-          model: User,
-          attributes: ['username']
-        }
+        'description'
+      [sequelize.literal('SELECT * FROM clothing WHERE type = shirt'), 'shirt']
       ]
     })
-      .then(dbClothingData => {
-        if (!dbClothingData) {
-          res.status(404).json({ message: 'No item found with this id' });
-          return;
-        }
-        res.json(dbClothingData);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+    .then(dbClothingData => res.json(dbClothingData))
+    .catch (err => {
+      console.log(err);
+      res.status(500).json(err);
 
- 
-  
-  //post clothing route
+    })
+  }
+  })
+
+  //post clothing route, user needs to be logged in
   router.post('/', withAuth, (req, res) => {
   ///only able to post clothes if logged in
   if (req.session) {
