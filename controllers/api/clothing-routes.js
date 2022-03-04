@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { User, Chestwear } = require('../../models');
+const { User, Clothing } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    Chestwear.findAll()
-      .then(dbChestwearData => res.json(dbChestwearData))
+    Clothing.findAll()
+      .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   });
 
   router.get('/:id', (req, res) => {
-    Chestwear.findOne({
+    Clothing.findOne({
       where: {
         id: req.params.id
       },
@@ -28,12 +28,12 @@ router.get('/', (req, res) => {
         }
       ]
     })
-      .then(dbChestwearData => {
-        if (!dbChestwearData) {
+      .then(dbClothingData => {
+        if (!dbClothingData) {
           res.status(404).json({ message: 'No item found with this id' });
           return;
         }
-        res.json(dbChestwearData);
+        res.json(dbClothingData);
       })
       .catch(err => {
         console.log(err);
@@ -43,11 +43,11 @@ router.get('/', (req, res) => {
   
   router.post('/', (req, res) => {
   ///add in withAuth later
-      Chestwear.create({
+      Clothing.create({
         description: req.body.description,
         wardrobe_id: req.body.wardrobe_id
       })
-        .then(dbChestwearData => res.json(dbChestwearData))
+        .then(dbClothingData => res.json(dbClothingData))
         .catch(err => {
           console.log(err);
           res.status(500).json(err);
