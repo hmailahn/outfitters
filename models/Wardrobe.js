@@ -4,28 +4,19 @@ const sequelize = require('../config/connection')
 class Wardrobe extends Model {}
 
 Wardrobe.init(
-    {
+    {   
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             primaryKey: true,
-            autoIncrement: true
-        },
-        outfit: {
-            type: DataTypes.INTEGER,
-            // Not sure how to structure
-        },
-        chestwear: {
-            type: DataTypes.INTEGER,
-            // // Not sure how to structure
-        },
-        legwear: {
-            type: DataTypes.INTEGER,
-            // Not sure how to structure
-        },
-        footwear: {
-            type: DataTypes.INTEGER,
-            // // Not sure how to structure
+            autoIncrement: true,
+            allowNull: false
         }
     },
     {

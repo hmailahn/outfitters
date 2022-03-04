@@ -1,22 +1,22 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Legwear extends Model {}
+class Clothing extends Model {};
 
-Legwear.init( 
+Clothing.init(
     {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true,
             autoIncrement: true
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
-            // validate: {
-            //     isAlphanumeric
-            // }
+            allowNull: false
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         wardrobe_id: {
             type: DataTypes.INTEGER,
@@ -30,8 +30,8 @@ Legwear.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'legwear'
+        modelName: 'clothing'
     }
-);
+)
 
-module.exports = Legwear;
+module.exports = Clothing;
