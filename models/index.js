@@ -1,50 +1,24 @@
 // import all models
-const Chestwear =  require('./Chestwear')
-const Footwear =  require('./Footwear')
-const Legwear =  require('./Legwear')
-const Outfit =  require('./Outfit')
 const User =  require('./User')
 const Wardrobe = require('./Wardrobe')
+const Clothing = require('./Clothing')
 
 // create associations
 User.hasOne(Wardrobe, {
-    foreignKey: ''
+    foreignKey: 'wardrobe_id'
 })
 
 Wardrobe.belongsTo(User, {
-    foreignKey: ''
+    foreignKey: 'wardrobe_id'
 })
 
-Wardrobe.hasMany(Chestwear, {
-    foreignKey:''
+Wardrobe.hasMany(Clothing, {
+    foreignKey: 'wardrobe_id'
 })
 
-Chestwear.belongsTo(Wardrobe, {
-    foreignKey:''
+Clothing.belongsTo(Wardrobe, {
+    foreignKey: 'wardrobe_id'
 })
 
-Wardrobe.hasMany(Legwear, {
-    foreignKey:''
-})
 
-Legwear.belongsTo(Wardrobe, {
-    foreignKey:''
-})
-
-Wardrobe.hasMany(Footwear, {
-    foreignKey:''
-})
-
-Footwear.belongsTo(Wardrobe, {
-    foreignKey:''
-})
-
-Wardrobe.hasMany(Outfit, {
-    foreignKey:''
-})
-
-Outfit.belongsTo(Wardrobe, {
-    foreignKey:''
-})
-
-module.exports = { Chestwear, Footwear, Legwear, Outfit, User, Wardrobe }
+module.exports = { User, Wardrobe, Clothing }
