@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
       attributes: [
         'id',
         'description',
+        'type',
         'wardrobe_id'
       ],
       include: [
@@ -45,6 +46,7 @@ router.get('/', (req, res) => {
   ///add in withAuth later
       Clothing.create({
         description: req.body.description,
+        type: req.body.type,
         wardrobe_id: req.body.wardrobe_id
       })
         .then(dbClothingData => res.json(dbClothingData))
@@ -54,5 +56,7 @@ router.get('/', (req, res) => {
         });
     
   });
+
+
 
   module.exports = router;

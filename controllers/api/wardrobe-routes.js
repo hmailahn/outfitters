@@ -11,6 +11,15 @@ router.get('/', (req, res) => {
       });
   });
 
-  
+router.post('/', (req, res) => {
+    Wardrobe.create({
+        user_id: req.body.user_id
+    })
+    .then(dbWardrobeData => res.json(dbWardrobeData))
+        .catch(err => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+})
 
 module.exports = router;
