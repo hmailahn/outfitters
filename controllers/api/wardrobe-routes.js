@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Wardrobe } = require('../../models');
+const { User, Wardrobe, Clothing } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //get all wardrobe from user logged in
