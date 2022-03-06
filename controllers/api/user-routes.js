@@ -17,13 +17,7 @@ router.get("/", (req, res) => {
       attributes: { exclude: ["password"] },
       where: {
         id: req.params.id,
-      },
-      include: [
-        {
-          model: Wardrobe,
-          attributes: ["id"],
-        }
-      ]
+      }
     })
       .then((dbUserData) => {
         if (!dbUserData) {
