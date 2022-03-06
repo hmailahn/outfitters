@@ -3,32 +3,32 @@ const { Clothing } = require("../models/");
 const clothingData = [
     {
         description: "pink",
-        type: "shirt",
+        type: "chestwear",
         user_id: 1
     },
     {
         description: "purple",
-        type: "pants",
+        type: "legwear",
         user_id: 1
     },
     {
         description: "black",
-        type: "shoes",
+        type: "footwear",
         user_id: 1
     },
     {
         description: "blue flowers",
-        type: "shirt",
+        type: "chestwear",
         user_id: 1
     },
     {
         description: "gray sweats",
-        type: "pants",
+        type: "legwear",
         user_id: 2
     },
     {
         description: "vans",
-        type: "shoes",
+        type: "footwear",
         user_id: 2
     }
 ];
