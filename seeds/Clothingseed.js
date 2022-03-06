@@ -24,12 +24,12 @@ const clothingData = [
     {
         description: "gray sweats",
         type: "pants",
-        wardrobe_id: 1
+        wardrobe_id: 2
     },
     {
         description: "vans",
         type: "shoes",
-        wardrobe_id: 1
+        wardrobe_id: 2
     }
 ];
 
