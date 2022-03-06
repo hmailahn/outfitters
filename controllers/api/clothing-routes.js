@@ -28,7 +28,9 @@ router.get('/chestwear', (req, res) => {
       // },
       attributes:[
         'id',
-        [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestwear")'), 'chestwear_description']
+        // [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestwear")'), 'chestwear_description'],
+        // [sequelize.literal('(SELECT description FROM clothing WHERE type = (SELECT description FROM clothing WHERE type = "chestware"))'), 'chestwear_description']
+         [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestware" IN (SELECT description FROM clothing WHERE type = "chestware"))'), 'chestwear_description']
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
@@ -39,6 +41,55 @@ router.get('/chestwear', (req, res) => {
     })
   // }
 })
+
+//legwear route, can only return 1 rn
+router.get('/legwear', (req, res) => {
+  console.log('test');
+  
+   // if (req.session) {
+   Clothing.findAll({
+     // where: {
+     //   user_id: req.session.user_id
+     // },
+     attributes:[
+       'id',
+       [sequelize.literal('(SELECT description FROM clothing WHERE type = "legwear")'), 'legwear_description']
+      
+     ]
+   })
+   .then(dbClothingData => res.json(dbClothingData))
+   .catch (err => {
+     console.log(err);
+     res.status(500).json(err);
+
+   })
+ // }
+})
+
+//footwear route, can only return 1 rn
+router.get('/footwear', (req, res) => {
+  console.log('test');
+  
+   // if (req.session) {
+   Clothing.findAll({
+     // where: {
+     //   user_id: req.session.user_id
+     // },
+     attributes:[
+       'id',
+       [sequelize.literal('(SELECT description FROM clothing WHERE type = "footwear")'), 'footwear_description'],
+      
+     ]
+   })
+   .then(dbClothingData => res.json(dbClothingData))
+   .catch (err => {
+     console.log(err);
+     res.status(500).json(err);
+
+   })
+ // }
+})
+
 
 //post clothing route, user needs to be logged in
 router.post('/', (req, res) => {
