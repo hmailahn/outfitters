@@ -18,13 +18,11 @@ router.get('/', (req, res) => {
   });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-  router.get('/chestwear', (req, res) => {
-   console.log('test');
-   
+  router.get('/type', (req, res) => {
     // if (req.session) {
     Clothing.findAll({
       where: {
-        wardrobe_id: req.session.user_id
+        type: req.body.type
       },
       attributes:[
         'id',
