@@ -24,12 +24,12 @@ const clothingData = [
     {
         description: "gray sweats",
         type: "legwear",
-        user_id: 2
+        user_id: 1
     },
     {
         description: "vans",
         type: "footwear",
-        user_id: 2
+        user_id: 1
     }
 ];
 
