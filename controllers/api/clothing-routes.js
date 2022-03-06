@@ -28,8 +28,7 @@ router.get('/chestwear', (req, res) => {
       // },
       attributes:[
         'id',
-        'description',
-        [sequelize.literal('(SELECT description FROM clothing WHERE type = "shirt"'), 'shirt']
+        [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestwear")'), 'chestwear_description']
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
