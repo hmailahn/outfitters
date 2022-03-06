@@ -18,19 +18,13 @@ router.get('/', (req, res) => {
 });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-router.get('/chestwear', (req, res) => {
-   console.log('test');
+router.get('/type', (req, res) => {
    
     // if (req.session) {
     Clothing.findAll({
-      // where: {
-      //   user_id: req.session.user_id
-      // },
-      attributes:[
-        'id',
-        'description',
-        [sequelize.literal('(SELECT description FROM clothing WHERE type = "shirt"'), 'shirt']
-      ]
+      where: {
+        type: req.body.type
+      },
     })
     .then(dbClothingData => res.json(dbClothingData))
     .catch (err => {

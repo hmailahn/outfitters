@@ -35,9 +35,21 @@ async function clothesSubmit(event) {
 async function getByType(event) {
     event.preventDefault();
     const type = document.querySelector("#Type-2").value
-    const response = await fetch("api/clothing", {
+    const response = await fetch("api/clothing/type", {
+        method: "get",
+        body: JSON.stringify({
+            type
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
         
     })
+    if(response.ok){
+     console.log("ok? you did the expected?")       
+    } else {
+        console.log('you absolute bafoon')
+    }
 }
-
+document.querySelector('#clothes-search').addEventListener('submit', getByType)
 document.querySelector('.clothes').addEventListener('submit', clothesSubmit)
