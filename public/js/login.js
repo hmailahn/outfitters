@@ -17,7 +17,7 @@ async function loginFormSubmitHandler(event) {
         })
         
         if(response.ok){
-            document.location.replace('/wardrobe')
+            document.location.replace('/login')
         } else{
             alert(response.statusText);
         }
@@ -41,7 +41,7 @@ async function signupFormSubmitHandler(event) {
         })
 
         if(response.ok) {
-            document.location.replace('/')
+            document.location.replace('/login')
         } else(response.statusText)
     }
 }
