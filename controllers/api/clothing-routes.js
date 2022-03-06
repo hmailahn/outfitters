@@ -23,13 +23,13 @@ router.get('/chestwear', (req, res) => {
    
     // if (req.session) {
     Clothing.findAll({
-      where: {
-        user_id: req.session.user_id
-      },
+      // where: {
+      //   user_id: req.session.user_id
+      // },
       attributes:[
         'id',
-        'description'
-      [sequelize.literal('(SELECT * FROM clothing WHERE type = ?)'), 'type']
+        'description',
+        [sequelize.literal('(SELECT description FROM clothing WHERE type = "shirt"'), 'shirt']
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
