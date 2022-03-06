@@ -4,11 +4,11 @@ const { User, Clothing, Wardrobe } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 //find all clothes for user logged in session by using wardrobe_id
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
     Clothing.findAll({
-      where: {
-        wardrobe_id: req.session.user_id
-      },
+      // where: {
+      //   wardrobe_id: req.session.user_id
+      // },
     })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
@@ -18,10 +18,10 @@ router.get('/', withAuth, (req, res) => {
   });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-  router.get('/shirts', withAuth, (req, res) => {
+  router.get('/chestwear', (req, res) => {
    console.log('test');
    
-    if (req.session) {
+    // if (req.session) {
     Clothing.findAll({
       where: {
         wardrobe_id: req.session.user_id
@@ -38,24 +38,24 @@ router.get('/', withAuth, (req, res) => {
       res.status(500).json(err);
 
     })
-  }
+  // }
   })
 
   //post clothing route, user needs to be logged in
-  router.post('/', withAuth, (req, res) => {
+  router.post('/', (req, res) => {
   ///only able to post clothes if logged in
-  if (req.session) {
+  // if (req.session) {
       Clothing.create({
         description: req.body.description,
         type: req.body.type,
-        wardrobe_id: req.body.wardrobe_id
+        wardrobe_id: req.body.user_id
       })
         .then(dbClothingData => res.json(dbClothingData))
         .catch(err => {
           console.log(err);
           res.status(500).json(err);
         });
-      }
+      // }
   });
 
   ///can add put and delete routes later
