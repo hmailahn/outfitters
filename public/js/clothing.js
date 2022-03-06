@@ -35,7 +35,7 @@ async function clothesSubmit(event) {
 async function getByType(event) {
     event.preventDefault();
     const type = document.querySelector("#Type-2").value
-    const response = await fetch("api/clothing/type", {
+    const response = await fetch("api/clothing", {
         
     })
 }
