@@ -1,4 +1,4 @@
-async function chestwearButtonHandler() {
+async function clothingButtonHandler() {
     const response = await fetch('api/clothing', {
         method: "GET",
         headers: {
@@ -12,5 +12,25 @@ async function chestwearButtonHandler() {
         alert(response.statusText)
     }
 }
+async function clothesSubmit(event) {
+    event.preventDefault();
+    const description = document.querySelector("#description").value.trim()
+    const type = document.querySelector("#Type").value
+    const user_id = 1
+    const response = await fetch('api/clothing', {
+        method: "post",
+        body: JSON.stringify({
+            description,
+            type,
+            user_id
+        }),
+        headers: { 'Content-Type': 'application/json'}
+    })
+    if (response.ok){
+        console.log('added clothes')
+    } else {
+        console.log("you're really dumb huh")
+    }
+}
 
-chestwearButtonHandler()
+document.querySelector('.clothes').addEventListener('submit', clothesSubmit)
