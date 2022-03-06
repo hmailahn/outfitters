@@ -22,7 +22,7 @@ Clothing.init(
         wardrobe_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'wardrobe',
+                model: 'user',
                 key: 'id'
             }
         }
