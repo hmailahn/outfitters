@@ -18,18 +18,20 @@ router.get('/', withAuth, (req, res) => {
   });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-  router.get('/shirts', withAuth, (req, res) => {
+  router.get('/chestwear', (req, res) => {
    console.log('test');
    
-    if (req.session) {
+   const sql = `SELECT * FROM clothing WHERE wardrobe_id = ? and type = ?`;
+ 
     Clothing.findAll({
       where: {
-        wardrobe_id: req.session.user_id
+        // wardrobe_id: req.session.user_id
+        
       },
       attributes:[
         'id',
-        'description'
-      [sequelize.literal('(SELECT * FROM clothing WHERE type = ?)'), 'type']
+        'description',
+        [sequelize.literal('(SELECT * FROM clothing)'), 'clothing']
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
@@ -38,7 +40,7 @@ router.get('/', withAuth, (req, res) => {
       res.status(500).json(err);
 
     })
-  }
+  
   })
 
   //post clothing route, user needs to be logged in
