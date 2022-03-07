@@ -6,8 +6,12 @@ const withAuth = require('../../utils/auth');
 //find all clothes for user logged in session by using wardrobe_id
 router.get('/', (req, res) => {
     Clothing.findAll({
+      where: {
+        user_id: 1,
+      },
+      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
       // where: {
-      //   wardrobe_id: req.session.user_id
+      //   user_id: req.session.user_id,
       // },
     })
       .then(dbClothingData => res.json(dbClothingData))
@@ -18,19 +22,23 @@ router.get('/', (req, res) => {
 });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-router.get('/chestwear', (req, res) => {
-   console.log('test');
-   
+router.get('/chestwear', (req, res) => {   
     // if (req.session) {
     Clothing.findAll({
+      where: {
+        user_id: 1,
+        type: 'chestwear'
+      },
+      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
       // where: {
-      //   user_id: req.session.user_id
-      // },
-      attributes:[
+      //   user_id: req.session.user_id,
+      //   type: chestwear
+      // }
+      attributes: [
+        'user_id',
         'id',
-        // [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestwear")'), 'chestwear_description'],
-        // [sequelize.literal('(SELECT description FROM clothing WHERE type = (SELECT description FROM clothing WHERE type = "chestware"))'), 'chestwear_description']
-         [sequelize.literal('(SELECT description FROM clothing WHERE type = "chestware" IN (SELECT description FROM clothing WHERE type = "chestware"))'), 'chestwear_description']
+        'description',
+        'type'
       ]
     })
     .then(dbClothingData => res.json(dbClothingData))
@@ -42,26 +50,31 @@ router.get('/chestwear', (req, res) => {
   // }
 })
 
-//legwear route, can only return 1 rn
+// get legwear route by user_id
 router.get('/legwear', (req, res) => {
   console.log('test');
   
    // if (req.session) {
    Clothing.findAll({
+    where: {
+      user_id: 1,
+      type: 'legwear'
+    },
+    // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
      // where: {
-     //   user_id: req.session.user_id
+      //  user_id: req.session.user_id
+      //  type: 'legwear'
      // },
      attributes:[
-       'id',
-       [sequelize.literal('(SELECT description FROM clothing WHERE type = "legwear")'), 'legwear_description']
-      
-     ]
+      'user_id',
+      'id',
+      'description',
+      'type'     ]
    })
    .then(dbClothingData => res.json(dbClothingData))
    .catch (err => {
      console.log(err);
      res.status(500).json(err);
-
    })
  // }
 })
@@ -72,13 +85,20 @@ router.get('/footwear', (req, res) => {
   
    // if (req.session) {
    Clothing.findAll({
+    where: {
+      user_id: 1,
+      type: 'footwear'
+    },
+    // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
      // where: {
-     //   user_id: req.session.user_id
+      //  user_id: req.session.user_id
+      //  type: 'footwear'
      // },
      attributes:[
-       'id',
-       [sequelize.literal('(SELECT description FROM clothing WHERE type = "footwear")'), 'footwear_description'],
-      
+      'user_id',
+      'id',
+      'description',
+      'type'       
      ]
    })
    .then(dbClothingData => res.json(dbClothingData))
