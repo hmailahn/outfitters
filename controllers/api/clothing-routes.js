@@ -101,7 +101,11 @@ router.get('/footwear', (req, res) => {
       'type'       
      ]
    })
-   .then(dbClothingData => res.json(dbClothingData))
+   .then(dbClothingData => {
+     const clothes = dbClothingData.map(clothes => clothes.get({ plain: true}))
+     res.render('login', { clothes })
+     
+  })
    .catch (err => {
      console.log(err);
      res.status(500).json(err);

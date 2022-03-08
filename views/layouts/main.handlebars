@@ -8,8 +8,7 @@
     </div>
     <div>
         <label for="email-login">Email:</label>
-        <input type="text" id="email-login"/>
-    </div>
+        <input type="text" id="email-login"/>   </div>
     <div>
         <label for="password-login">Password:</label>
         <input type="text" id="password-login" />
@@ -52,21 +51,23 @@
     </div>
     <button id="clothing">Add Clothing Item</button>
 </form>
-<h2>Get by Type</h2>
-<form id="clothes-search">
-    <div>
-        <label for="Type-2">Type:</label>
-        <select id="Type-2" name="Type">
+<h2>Search by Type:</h2>
+<div>
+        <label for="Type-search">Type:</label>
+        <select id="Type-search" name="Type-search">
             <option value="Chestwear">Chestwear</option>
             <option value="Legwear">Legwear</option>
             <option value="Footwear">Footwear</option>
         </select>
-    </div>
-    <button id="clothing-search">Search for clothes</button>
-</form>
-<div class="clothes-div"></div>
-
+        <button id="search-btn">Search by Type</button>
 </div>
+<div id="clothes-div">
+    {{#each clothes}}
+    <h2>Showing all {{type}}</h2>
+    <p>Description: {{description}}</p>
+    {{/each}}
+</div>
+{{}}
 <script src="js/login.js"></script>
 <script src="js/logout.js"></script>
 <script src="js/clothing.js"></script>

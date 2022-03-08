@@ -17,6 +17,10 @@ async function clothesSubmit(event) {
     const description = document.querySelector("#description").value.trim()
     const type = document.querySelector("#Type").value
     const user_id = 1
+    if(description === ''){
+        console.log("No description given")
+        return
+    }
     const response = await fetch('api/clothing', {
         method: "post",
         body: JSON.stringify({
@@ -32,26 +36,16 @@ async function clothesSubmit(event) {
         console.log("you're really dumb huh")
     }
 }
-async function getByType(event) {
-    event.preventDefault();
-    const type = document.querySelector("#Type-2").value
-    const response = await fetch("api/clothing/" + type, {
+async function clothesSearch() {
+    const type = document.querySelector("#type-search").value
+    const response  = await fetch('api/clothing/' + type, {
         method: "get",
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json'}
     })
-    if(response.ok){
-        console.log(response.length)
-        for (var i = 0; i < response.length; i++) {
-            const clothingDiv = document.querySelector('#clothes-div')
-            const clothingP = document.createElement('p')
-            clothingP.textContent = response[i]
-            clothingDiv.appendChild(clothingP)
-        }
-    } else {
-        console.log('you absolute bafoon')
+    if(response.ok) {
+        document.location.reload()
     }
-}
-document.querySelector('#clothes-search').addEventListener('submit', getByType)
+    }
+
+document.querySelector('#search-btn').addEventListener('click', clothesSearch)
 document.querySelector('.clothes').addEventListener('submit', clothesSubmit)
