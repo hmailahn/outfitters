@@ -32,5 +32,13 @@ async function clothesSubmit(event) {
         console.log("you're really dumb huh")
     }
 }
-
+async function clothesSearch() {
+    const type = document.querySelector("#type-search").value
+    var response = await fetch('api/clothing/' + type, {
+        method: "get",
+        headers: { 'Content-Type': 'application/json'}
+    })
+        console.log(JSON.stringify(response))
+    }
+document.querySelector('#search-btn').addEventListener('click', clothesSearch)
 document.querySelector('.clothes').addEventListener('submit', clothesSubmit)
