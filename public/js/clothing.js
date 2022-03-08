@@ -17,6 +17,10 @@ async function clothesSubmit(event) {
     const description = document.querySelector("#description").value.trim()
     const type = document.querySelector("#Type").value
     const user_id = 1
+    if(description === ''){
+        console.log("No description given")
+        return
+    }
     const response = await fetch('api/clothing', {
         method: "post",
         body: JSON.stringify({
@@ -34,11 +38,14 @@ async function clothesSubmit(event) {
 }
 async function clothesSearch() {
     const type = document.querySelector("#type-search").value
-    var response = await fetch('api/clothing/' + type, {
+    const response  = await fetch('api/clothing/' + type, {
         method: "get",
         headers: { 'Content-Type': 'application/json'}
     })
-        console.log(JSON.stringify(response))
+    if(response.ok) {
+        document.location.reload()
     }
+    }
+
 document.querySelector('#search-btn').addEventListener('click', clothesSearch)
 document.querySelector('.clothes').addEventListener('submit', clothesSubmit)

@@ -61,6 +61,13 @@
         </select>
         <button id="search-btn">Search by Type</button>
 </div>
+<div id="clothes-div">
+    {{#each clothes}}
+    <h2>Showing all {{type}}</h2>
+    <p>Description: {{description}}</p>
+    {{/each}}
+</div>
+{{}}
 <script src="js/login.js"></script>
 <script src="js/logout.js"></script>
 <script src="js/clothing.js"></script>
