@@ -21,4 +21,4 @@ Outfitters is a full stack application that will allow a user to create an accou
 https://github.com/hmailahn/outfitters 
 
 ## Heroku Deployed Application Link
-<!-- Placeholder value -->
+https://outfitters-agent-shields.herokuapp.com/

@@ -35,18 +35,20 @@ async function clothesSubmit(event) {
 async function getByType(event) {
     event.preventDefault();
     const type = document.querySelector("#Type-2").value
-    const response = await fetch("api/clothing/type", {
+    const response = await fetch("api/clothing/" + type, {
         method: "get",
-        body: JSON.stringify({
-            type
-        }),
         headers: {
             'Content-Type': 'application/json'
         }
-        
     })
     if(response.ok){
-     console.log("ok? you did the expected?")       
+        console.log(response.length)
+        for (var i = 0; i < response.length; i++) {
+            const clothingDiv = document.querySelector('#clothes-div')
+            const clothingP = document.createElement('p')
+            clothingP.textContent = response[i]
+            clothingDiv.appendChild(clothingP)
+        }
     } else {
         console.log('you absolute bafoon')
     }

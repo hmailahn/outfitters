@@ -19,7 +19,7 @@ Clothing.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        wardrobe_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',

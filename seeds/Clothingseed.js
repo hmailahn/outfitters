@@ -30,6 +30,21 @@ const clothingData = [
         description: "vans",
         type: "footwear",
         user_id: 1
+    },
+    {
+        description: "MTG shirt",
+        type: "chestwear",
+        user_id: 2
+    },
+    {
+        description: "black nike joggers",
+        type: "legwear",
+        user_id: 2
+    },
+    {
+        description: "black midtop nike airforce 1",
+        type: "footwear",
+        user_id: 2
     }
 ];
 
