@@ -1,4 +1,27 @@
-<h1>Welcome To Outfitters</h1>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outfitters</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Welcome To Outfitters</h1>
+      <nav>
+        <h3>
+            {{!-- hey Cameron, can you make this a function where it logs the user out? --}}
+          <a href="/login">Logout</a>
+        </h3>
+        <h3>
+            <a href="/">Add Clothing Into Wardrobe</a></h3>
+        <h3>View Clothing In Wardrobe</h3>
+      </nav>
+    </header>
+
+  
 <button id="logout">Log Out</button>
 <h2>Login:</h2>
 <form class="login-form">
@@ -36,22 +59,11 @@
     <button type="submit">Signup</button>
     </div>
 </form>
-<h2>Clothes:</h2>
-<form class="Clothes">
-    <div>
-        <label for="description">Description:</label>
-        <input type="text" id="description"/>
-    </div>
-    <div>
-        <label for="Type">Type:</label>
-        <select id="Type" name="Type">
-            <option value="Chestwear">Chestwear</option>
-            <option value="Legwear">Legwear</option>
-            <option value="Footwear">Footwear</option>
-        </select>
-    </div>
-    <button id="clothing">Add Clothing Item</button>
-</form>
-<script src="js/login.js"></script>
-<script src="js/logout.js"></script>
-<script src="js/clothing.js"></script>
+
+    <script src="js/login.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/clothing.js"></script>
+
+  </body>
+
+</html>
