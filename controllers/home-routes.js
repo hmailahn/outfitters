@@ -3,10 +3,10 @@ const router = require("express").Router();
 //homepage, user can click options to add to wardrobe or add clothing
 router.get("/", (req, res) => {
   // if (!req.session.loggedIn) {
-  res.redirect("/login");
+//   res.redirect("/login");
 //   return;
   // }
-
+res.render('homepage');
   //buttons on homepage to add clothing or view wardrobe
 });
 
