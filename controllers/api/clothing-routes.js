@@ -131,6 +131,7 @@ if (req.session) {
         res.status(500).json(err);
       });
     }
+    
 });
 
   ///can add put and delete routes later
