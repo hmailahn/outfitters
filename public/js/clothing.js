@@ -17,15 +17,21 @@ async function getAllClothes() {
         clothingP.textContent = data[i].description
         const clothingIcon = document.createElement('img')
         clothingIcon.src = "icons/" + data[i].type + ".png"
+        const deleteId = data[i].id
+        const deleteBtn = document.createElement('button')
+        deleteBtn.id = deleteId
+        deleteBtn.textContent = "Delete"
+        deleteBtn.className= "DeleteBtn"
         clothingDiv.appendChild(clothingP)
         clothingDiv.appendChild(clothingIcon)
+        deleteBtn.addEventListener('click', deleteItem)
+        clothingDiv.appendChild(deleteBtn)
         }
     } else{
         alert(response.statusText)
     }
 }
 async function clothesSubmit(event) {
-    console.log("button clicked")
     event.preventDefault();
     event.stopPropagation();
     const description = document.querySelector("#description").value.trim()
@@ -66,9 +72,20 @@ async function clothesSearch(event) {
         clothingDiv.appendChild(clothingIcon)
         }
     }
+}
+async function deleteItem(event) {
+    const id = event.path[0].id
+    console.log(id)
+    const response = await fetch('api/clothing/' + id, {
+        method: 'delete',
+        headers: { 'Content-Type': 'application/json'}
+    })
+    if(response.ok){
+        document.location.reload()
     }
+}
 getAllClothes()
-const footwearSearch = document.querySelector("#legwear").addEventListener('click', clothesSearch)
-const legwearSearch = document.querySelector("#footwear").addEventListener('click', clothesSearch)
-const chestwearSearch = document.querySelector("#chestwear").addEventListener('click', clothesSearch)
+document.querySelector("#legwear").addEventListener('click', clothesSearch)
+document.querySelector("#chestwear").addEventListener('click', clothesSearch)
+document.querySelector('#footwear').addEventListener('click', clothesSearch)
 document.querySelector('#clothing').addEventListener('click', clothesSubmit)

@@ -1,9 +1,8 @@
 #legwear, #chestwear, #footwear{
-    float: left;
+    width: 100%;
 }
 #legwear-div, #chestwear-div, #footwear-div {
-    width: 75%;
-    float: right;
+    width: 60%;
 }
 #legwear-div img, #chestwear-div img, #footwear-div img {
     width: 5%;

@@ -129,9 +129,20 @@ router.post('/', withAuth, (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-
+    })
   ///can add put and delete routes later
-
+router.delete('/:id', withAuth, (req, res) => { 
+  Clothing.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dbClothingData => res.json(dbClothingData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
 
 
 module.exports = router;
