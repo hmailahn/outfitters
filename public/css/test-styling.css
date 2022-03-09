@@ -2,15 +2,30 @@
     width: 100%;
 }
 #legwear-div, #chestwear-div, #footwear-div {
-    width: 60%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 #legwear-div img, #chestwear-div img, #footwear-div img {
-    width: 5%;
-    height: 5%;
+    width: 25%;
+    height: 25%;
+
 }
 .type-search {
     width: 100%;
 }
 footer {
     clear: both;
+}
+img{
+    width: 25%;
+}
+#all-clothes div{
+    width: 25%
+}
+
+#all-clothes{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -82,7 +82,29 @@ router.get('/legwear', withAuth, (req, res) => {
    })
  }
 })
-
+router.get('/:id', withAuth, (req, res) => {
+   Clothing.findAll({
+     //hard code to test
+    // where: {
+    //   user_id: 1,
+    //   type: 'legwear'
+    // },
+    // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
+     where: {
+       id: req.params.id,
+     },
+     attributes:[
+      'user_id',
+      'id',
+      'description',
+      'type'     ]
+   })
+   .then(dbClothingData => res.json(dbClothingData))
+   .catch (err => {
+     console.log(err);
+     res.status(500).json(err);
+   })
+})
 //footwear route, can only return 1 rn
 router.get('/footwear', withAuth, (req, res) => {
   console.log('test');
