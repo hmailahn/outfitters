@@ -41,7 +41,8 @@ async function signupFormSubmitHandler(event) {
         })
 
         if(response.ok) {
-            document.location.replace('/login')
+            //once user is signed up, they will be redirected to the homepage
+            document.location.replace('/')
         } else(response.statusText)
     }
 }
