@@ -34,7 +34,7 @@ router.get('/chestwear', (req, res) => {
       // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
       where: {
         user_id: req.session.user_id,
-        type: chestwear
+        type: 'chestwear'
       },
       attributes: [
         'user_id',

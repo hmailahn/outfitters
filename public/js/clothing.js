@@ -51,16 +51,29 @@ async function clothesSubmit(event) {
         style.display.block(notAdded);
     }
 }
-// async function clothesSearch() {
-//     const type = document.querySelector("#type-search").value
-//     const response  = await fetch('api/clothing/' + type, {
-//         method: "get",
-//         headers: { 'Content-Type': 'application/json'}
-//     })
-//     if(response.ok) {
-//         document.location.reload()
-//     }
-//     }
+async function clothesSearch(event) {
+    var type = event.target.textContent
+    console.log(type)
+    const response  = await fetch('api/clothing/' + type, {
+        method: "get",
+        headers: { 'Content-Type': 'application/json'}
+    })
+    if(response.ok) {
+        const data = await response.json()
+        const clothingDiv = document.querySelector("#" + type +"-div")
+        for(var i = 0; i < data.length; i++) {
+            console.log(data[i])
+        const clothingP = document.createElement('p')
+        clothingP.textContent = data[i].description
+        const clothingIcon = document.createElement('img')
+        clothingIcon.src = "icons/" + type + ".png"
+        clothingDiv.appendChild(clothingP)
+        clothingDiv.appendChild(clothingIcon)
+        }
+    }
+    }
 getAllClothes()
-// document.querySelector('#search-btn').addEventListener('click', clothesSearch)
+const footwearSearch = document.querySelector("#legwear").addEventListener('click', clothesSearch)
+const legwearSearch = document.querySelector("#footwear").addEventListener('click', clothesSearch)
+const chestwearSearch = document.querySelector("#chestwear").addEventListener('click', clothesSearch)
 document.querySelector('#clothing').addEventListener('click', clothesSubmit)
