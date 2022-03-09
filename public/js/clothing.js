@@ -36,6 +36,13 @@ async function getAllClothes() {
 }
 
 async function clothesSearch(event) {
+    if(event.target.className === "toggled") {
+        event.target.className = "untoggled"
+        toggledDiv = document.querySelector("#" + event.target.textContent + "-subdiv")
+        console.log(toggledDiv)
+        toggledDiv.remove()
+    } else {
+    console.log("button has not been toggled")
     var type = event.target.textContent
     const response  = await fetch('api/clothing/' + type, {
         method: "get",
@@ -43,17 +50,23 @@ async function clothesSearch(event) {
     })
     if(response.ok) {
         const data = await response.json()
+        console.log(data)
         const clothingDiv = document.querySelector("#" + type +"-div")
+        const subDiv = document.createElement("div")
         for(var i = 0; i < data.length; i++) {
+        subDiv.id = data[0].type + "-subdiv"
         const clothingP = document.createElement('p')
         clothingP.textContent = data[i].description
         const clothingIcon = document.createElement('img')
         clothingIcon.src = "icons/" + type + ".png"
-        clothingDiv.appendChild(clothingP)
-        clothingDiv.appendChild(clothingIcon)
+        subDiv.appendChild(clothingP)
+        subDiv.appendChild(clothingIcon)
+        clothingDiv.appendChild(subDiv)
         }
+        event.target.className = "toggled";
     }
-}
+    }}
+    
 async function deleteItem(event) {
     const id = event.path[0].id
     console.log(id)
@@ -65,7 +78,7 @@ async function deleteItem(event) {
         document.location.reload()
     }
 }
-async function outfitGenerator(event){
+async function outfitGenerator(){
     
     const allClothes = await fetch('api/clothing', {
         method: "GET",
@@ -114,8 +127,8 @@ async function getClothesIdForOutfit(legwear, chestwear, footwear) {
 async function getOutfitClothes(legwearId, chestwearId, footwearId) {
     const ids = []
     ids.push(chestwearId)
-    ids.push(footwearId)
     ids.push(legwearId)
+    ids.push(footwearId)
     const outfitDiv = document.querySelector('#outfit')
     const responeArr = []
     for (var i = 0; i < ids.length ; i++) {
