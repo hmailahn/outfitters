@@ -34,7 +34,7 @@ router.get('/chestwear', withAuth, (req, res) => {
       // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
       where: {
         user_id: req.session.user_id,
-        type: chestwear
+        type: 'chestwear'
       },
       attributes: [
         'user_id',
@@ -106,7 +106,7 @@ router.get('/footwear', withAuth, (req, res) => {
       'type'       
      ]
    })
-   .then(dbClothingData => res.json(dbClothingData))
+   .then(dbClothingData => {res.json(dbClothingData)})
    .catch (err => {
      console.log(err);
      res.status(500).json(err);
@@ -117,21 +117,18 @@ router.get('/footwear', withAuth, (req, res) => {
 
 
 //post clothing route, user needs to be logged in
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
 ///only able to post clothes if logged in
-// if (req.session) {
     Clothing.create({
       description: req.body.description,
       type: req.body.type,
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
-    // }
-});
 
   ///can add put and delete routes later
 
