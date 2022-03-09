@@ -1,3 +1,6 @@
+ <a href="/viewclothes">
+  <button>View Wardrobe</button>
+  </a>
 <h2>Clothes:</h2>
 <form class="Clothes">
     <div>
@@ -6,13 +9,14 @@
     </div>
     <div>
         <label for="Type">Type:</label>
-        <select id="Type" name="Type">
+        <select id="Type" name="Type" value="Select Item">
+            <option value="Type-Select" selected>Please Select A Type</option>
             <option value="Chestwear">Chestwear</option>
             <option value="Legwear">Legwear</option>
             <option value="Footwear">Footwear</option>
         </select>
     </div>
     <button id="clothing">Add Clothing Item</button>
-    <div class="itemAdded" style="display: none">Item Added!</div>
-    <div class="notAdded" style="display: none">Item was unable to be added.</div>
 </form>
+<script src="js/logout.js"></script>
+<script src="js/addclothing.js"></script>

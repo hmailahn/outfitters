@@ -6,13 +6,14 @@ const withAuth = require('../../utils/auth');
 //find all clothes for user logged in session by using wardrobe_id
 router.get('/', (req, res) => {
     Clothing.findAll({
-      where: {
-        user_id: 1,
-      },
-      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
+      //hard code to test
       // where: {
-      //   user_id: req.session.user_id,
+      //   user_id: 1,
       // },
+      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
+      where: {
+        user_id: req.session.user_id,
+      },
     })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
@@ -22,18 +23,19 @@ router.get('/', (req, res) => {
 });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-router.get('/chestwear', (req, res) => {   
-    // if (req.session) {
+router.get('/chestwear', withAuth, (req, res) => {   
+    if (req.session) {
     Clothing.findAll({
+      //hard code to test
+      // where: {
+      //   user_id: 1,
+      //   type: 'chestwear'
+      // },
+      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
       where: {
-        user_id: 1,
+        user_id: req.session.user_id,
         type: 'chestwear'
       },
-      // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context
-      // where: {
-      //   user_id: req.session.user_id,
-      //   type: chestwear
-      // }
       attributes: [
         'user_id',
         'id',
@@ -47,24 +49,26 @@ router.get('/chestwear', (req, res) => {
       res.status(500).json(err);
 
     })
-  // }
+  }
+ 
 })
 
 // get legwear route by user_id
-router.get('/legwear', (req, res) => {
+router.get('/legwear', withAuth, (req, res) => {
   console.log('test');
   
-   // if (req.session) {
+   if (req.session) {
    Clothing.findAll({
-    where: {
-      user_id: 1,
-      type: 'legwear'
-    },
+     //hard code to test
+    // where: {
+    //   user_id: 1,
+    //   type: 'legwear'
+    // },
     // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
-     // where: {
-      //  user_id: req.session.user_id
-      //  type: 'legwear'
-     // },
+     where: {
+       user_id: req.session.user_id,
+       type: 'legwear'
+     },
      attributes:[
       'user_id',
       'id',
@@ -76,24 +80,24 @@ router.get('/legwear', (req, res) => {
      console.log(err);
      res.status(500).json(err);
    })
- // }
+ }
 })
-
 //footwear route, can only return 1 rn
-router.get('/footwear', (req, res) => {
+router.get('/footwear', withAuth, (req, res) => {
   console.log('test');
   
-   // if (req.session) {
+   if (req.session) {
    Clothing.findAll({
-    where: {
-      user_id: 1,
-      type: 'footwear'
-    },
+     //hard code to test
+    // where: {
+    //   user_id: 1,
+    //   type: 'footwear'
+    // },
     // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
-     // where: {
-      //  user_id: req.session.user_id
-      //  type: 'footwear'
-     // },
+     where: {
+       user_id: req.session.user_id,
+       type: 'footwear'
+     },
      attributes:[
       'user_id',
       'id',
@@ -101,35 +105,64 @@ router.get('/footwear', (req, res) => {
       'type'       
      ]
    })
-   .then(dbClothingData => res.json(dbClothingData))
+   .then(dbClothingData => {res.json(dbClothingData)})
    .catch (err => {
      console.log(err);
      res.status(500).json(err);
 
    })
- // }
+ }
 })
-
-
+router.get('/:id', withAuth, (req, res) => {
+  Clothing.findAll({
+    //hard code to test
+   // where: {
+   //   user_id: 1,
+   //   type: 'legwear'
+   // },
+   // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
+    where: {
+      id: req.params.id,
+    },
+    attributes:[
+     'user_id',
+     'id',
+     'description',
+     'type'     ]
+  })
+  .then(dbClothingData => res.json(dbClothingData))
+  .catch (err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
+})
 //post clothing route, user needs to be logged in
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
 ///only able to post clothes if logged in
-// if (req.session) {
     Clothing.create({
       description: req.body.description,
       type: req.body.type,
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
-    // }
-});
-
+    })
   ///can add put and delete routes later
-
+router.delete('/:id', withAuth, (req, res) => { 
+  Clothing.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dbClothingData => res.json(dbClothingData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
 
 
 module.exports = router;
