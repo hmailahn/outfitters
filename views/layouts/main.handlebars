@@ -12,10 +12,13 @@
       <h1>
           <a href="/">Welcome To Outfitters</a>
           </h1>
-          <a href="/login">
+          {{#if loggedIn}}
+      <button id="logout">Log Out</button>
+       {{else}}
+        <a href="/login"></a>
       <button id="login">Log In </button>
       </a>
-      <button id="logout">Log Out</button>
+      {{/if}}
     </header>
 <main>
 {{{ body }}}
