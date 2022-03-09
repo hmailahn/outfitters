@@ -131,7 +131,6 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
       });
     // }
-    res.redirect('viewclothes');
 });
 
   ///can add put and delete routes later
