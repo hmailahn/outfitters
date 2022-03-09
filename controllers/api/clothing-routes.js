@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
-router.get('/chestwear', (req, res) => {   
+router.get('/chestwear', withAuth, (req, res) => {   
     if (req.session) {
     Clothing.findAll({
       //hard code to test
@@ -54,7 +54,7 @@ router.get('/chestwear', (req, res) => {
 })
 
 // get legwear route by user_id
-router.get('/legwear', (req, res) => {
+router.get('/legwear', withAuth, (req, res) => {
   console.log('test');
   
    if (req.session) {
@@ -84,7 +84,7 @@ router.get('/legwear', (req, res) => {
 })
 
 //footwear route, can only return 1 rn
-router.get('/footwear', (req, res) => {
+router.get('/footwear', withAuth, (req, res) => {
   console.log('test');
   
    if (req.session) {
@@ -119,7 +119,7 @@ router.get('/footwear', (req, res) => {
 //post clothing route, user needs to be logged in
 router.post('/', (req, res) => {
 ///only able to post clothes if logged in
-if (req.session) {
+// if (req.session) {
     Clothing.create({
       description: req.body.description,
       type: req.body.type,
@@ -130,8 +130,8 @@ if (req.session) {
         console.log(err);
         res.status(500).json(err);
       });
-    }
-    
+    // }
+    res.redirect('viewclothes');
 });
 
   ///can add put and delete routes later
