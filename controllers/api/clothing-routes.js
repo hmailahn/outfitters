@@ -103,8 +103,9 @@ router.get('/footwear', (req, res) => {
    })
    .then(dbClothingData => {
      const clothes = dbClothingData.map(clothes => clothes.get({ plain: true}))
-     res.render('login', { clothes })
-     
+     const clothesType = clothes[0].type
+    
+    res.render('login', { clothes, clothesType })
   })
    .catch (err => {
      console.log(err);
