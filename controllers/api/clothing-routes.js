@@ -122,20 +122,18 @@ router.get('/footwear', (req, res) => {
 
 
 //post clothing route, user needs to be logged in
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
 ///only able to post clothes if logged in
-if (req.session) {
     Clothing.create({
       description: req.body.description,
       type: req.body.type,
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
       .then(dbClothingData => res.json(dbClothingData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
-    }
     
 });
 

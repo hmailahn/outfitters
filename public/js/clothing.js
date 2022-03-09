@@ -1,7 +1,7 @@
 var itemAdded = document.querySelector('.itemAdded');
 var notAdded = document.querySelector('.notAdded');
 
-async function clothingButtonHandler() {
+async function getAllClothes() {
     const response = await fetch('api/clothing', {
         method: "GET",
         headers: {
@@ -10,16 +10,27 @@ async function clothingButtonHandler() {
     }
     )
     if( response.ok) {
-        console.log(JSON.stringify(response))
+        const data = await response.json()
+        const clothingDiv = document.querySelector("#all-clothes")
+        for(var i = 0; i < data.length; i++) {
+            console.log(data[i])
+        const clothingP = document.createElement('p')
+        clothingP.textContent = data[i].description
+        const clothingIcon = document.createElement('img')
+        clothingIcon.src = "icons/" + data[i].type + ".png"
+        clothingDiv.appendChild(clothingP)
+        clothingDiv.appendChild(clothingIcon)
+        }
     } else{
         alert(response.statusText)
     }
 }
 async function clothesSubmit(event) {
+    console.log("button clicked")
     event.preventDefault();
+    event.stopPropagation();
     const description = document.querySelector("#description").value.trim()
     const type = document.querySelector("#Type").value
-    const user_id = 1
     if(description === ''){
         console.log("No description given")
         return
@@ -28,29 +39,28 @@ async function clothesSubmit(event) {
         method: "post",
         body: JSON.stringify({
             description,
-            type,
-            user_id
+            type
         }),
         headers: { 'Content-Type': 'application/json'}
     })
     if (response.ok){
         console.log('added clothes')
-        style.display.block(itemAdded);
+        // style.display.block(itemAdded);
     } else {
         console.log("you're really dumb huh")
         style.display.block(notAdded);
     }
 }
-async function clothesSearch() {
-    const type = document.querySelector("#type-search").value
-    const response  = await fetch('api/clothing/' + type, {
-        method: "get",
-        headers: { 'Content-Type': 'application/json'}
-    })
-    if(response.ok) {
-        document.location.reload()
-    }
-    }
-
-document.querySelector('#search-btn').addEventListener('click', clothesSearch)
-document.querySelector('.clothes').addEventListener('submit', clothesSubmit)
+// async function clothesSearch() {
+//     const type = document.querySelector("#type-search").value
+//     const response  = await fetch('api/clothing/' + type, {
+//         method: "get",
+//         headers: { 'Content-Type': 'application/json'}
+//     })
+//     if(response.ok) {
+//         document.location.reload()
+//     }
+//     }
+getAllClothes()
+// document.querySelector('#search-btn').addEventListener('click', clothesSearch)
+document.querySelector('#clothing').addEventListener('click', clothesSubmit)
