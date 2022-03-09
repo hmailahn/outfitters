@@ -1,0 +1,17 @@
+#legwear, #chestwear, #footwear{
+    float: left;
+}
+#legwear-div, #chestwear-div, #footwear-div {
+    width: 75%;
+    float: right;
+}
+#legwear-div img, #chestwear-div img, #footwear-div img {
+    width: 5%;
+    height: 5%;
+}
+.type-search {
+    width: 100%;
+}
+footer {
+    clear: both;
+}

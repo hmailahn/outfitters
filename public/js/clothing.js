@@ -13,7 +13,6 @@ async function getAllClothes() {
         const data = await response.json()
         const clothingDiv = document.querySelector("#all-clothes")
         for(var i = 0; i < data.length; i++) {
-            console.log(data[i])
         const clothingP = document.createElement('p')
         clothingP.textContent = data[i].description
         const clothingIcon = document.createElement('img')
@@ -53,7 +52,6 @@ async function clothesSubmit(event) {
 }
 async function clothesSearch(event) {
     var type = event.target.textContent
-    console.log(type)
     const response  = await fetch('api/clothing/' + type, {
         method: "get",
         headers: { 'Content-Type': 'application/json'}
@@ -62,7 +60,6 @@ async function clothesSearch(event) {
         const data = await response.json()
         const clothingDiv = document.querySelector("#" + type +"-div")
         for(var i = 0; i < data.length; i++) {
-            console.log(data[i])
         const clothingP = document.createElement('p')
         clothingP.textContent = data[i].description
         const clothingIcon = document.createElement('img')
