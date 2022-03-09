@@ -44,10 +44,8 @@ async function clothesSubmit(event) {
     })
     if (response.ok){
         console.log('added clothes')
-        // style.display.block(itemAdded);
     } else {
         console.log("you're really dumb huh")
-        style.display.block(notAdded);
     }
 }
 async function clothesSearch(event) {
