@@ -82,7 +82,6 @@ router.get('/legwear', withAuth, (req, res) => {
    })
  }
 })
-
 //footwear route, can only return 1 rn
 router.get('/footwear', withAuth, (req, res) => {
   console.log('test');
@@ -114,8 +113,29 @@ router.get('/footwear', withAuth, (req, res) => {
    })
  }
 })
-
-
+router.get('/:id', withAuth, (req, res) => {
+  Clothing.findAll({
+    //hard code to test
+   // where: {
+   //   user_id: 1,
+   //   type: 'legwear'
+   // },
+   // WHEN SESSIONS FULLY FUNCTIONAL, SWITCH ABOVE WHERE CLAUSE WITH BELOW WHERE CLAUSE, can ask john to do since has context 
+    where: {
+      id: req.params.id,
+    },
+    attributes:[
+     'user_id',
+     'id',
+     'description',
+     'type'     ]
+  })
+  .then(dbClothingData => res.json(dbClothingData))
+  .catch (err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
+})
 //post clothing route, user needs to be logged in
 router.post('/', withAuth, (req, res) => {
 ///only able to post clothes if logged in
@@ -129,9 +149,20 @@ router.post('/', withAuth, (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-
+    })
   ///can add put and delete routes later
-
+router.delete('/:id', withAuth, (req, res) => { 
+  Clothing.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dbClothingData => res.json(dbClothingData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
 
 
 module.exports = router;
