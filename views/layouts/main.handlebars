@@ -1,5 +1,28 @@
-<h1>Welcome To Outfitters</h1>
-<button id="logout">Log Out</button>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outfitters</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>
+          <a href="/">Welcome To Outfitters</a>
+          </h1>
+          <a href="/login">
+      <button id="login">Log In </button>
+      </a>
+      <button id="logout">Log Out</button>
+    </header>
+<main>
+{{{ body }}}
+</main>
+  
+{{!-- 
+
 <h2>Login:</h2>
 <form class="login-form">
     <div>
@@ -35,39 +58,13 @@
     <button type="submit">Signup</button>
     </div>
 </form>
-<h2>Clothes:</h2>
-<form class="Clothes">
-    <div>
-        <label for="description">Description:</label>
-        <input type="text" id="description"/>
-    </div>
-    <div>
-        <label for="Type">Type:</label>
-        <select id="Type" name="Type">
-            <option value="Chestwear">Chestwear</option>
-            <option value="Legwear">Legwear</option>
-            <option value="Footwear">Footwear</option>
-        </select>
-    </div>
-    <button id="clothing">Add Clothing Item</button>
-</form>
-<h2>Search by Type:</h2>
-<div>
-        <label for="Type-search">Type:</label>
-        <select id="Type-search" name="Type-search">
-            <option value="Chestwear">Chestwear</option>
-            <option value="Legwear">Legwear</option>
-            <option value="Footwear">Footwear</option>
-        </select>
-        <button id="search-btn">Search by Type</button>
-</div>
-<div id="clothes-div">
-    {{#each clothes}}
-    <h2>Showing all {{type}}</h2>
-    <p>Description: {{description}}</p>
-    {{/each}}
-</div>
-{{}}
-<script src="js/login.js"></script>
-<script src="js/logout.js"></script>
-<script src="js/clothing.js"></script>
+
+    <script src="js/login.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/clothing.js"></script> --}}
+<footer>
+    Thanks for visiting!
+</footer>
+  </body>
+
+</html>
