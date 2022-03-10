@@ -41,7 +41,7 @@ async function clothesSearch(event) {
         toggledDiv = document.querySelector("#" + event.target.textContent + "-contentdiv")
         toggledDiv.remove()
     } else {
-    var type = event.target.textContent
+    var type = event.target.id
     const response  = await fetch('api/clothing/' + type, {
         method: "get",
         headers: { 'Content-Type': 'application/json'}
@@ -50,7 +50,6 @@ async function clothesSearch(event) {
         const data = await response.json()
         const clothingDiv = document.querySelector("#" + type +"-div")
         const clothingDivContent = document.createElement('div')
-        clothingDivContent.id = data[0].type + "-contentdiv"
         if(data.length === 0) {
             const clothingP = document.createElement('p') 
             clothingP.textContent = "No " + type + " Found"
@@ -58,6 +57,7 @@ async function clothesSearch(event) {
             clothingDivContent.id = type + "-div"
             clothingDiv.appendChild(clothingDivContent)
         } else{
+        clothingDivContent.id = data[0].type + "-contentdiv"
         for(var i = 0; i < data.length; i++) {
         const subDiv = document.createElement("div")
         subDiv.id = data[0].type + "-subdiv"

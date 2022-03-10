@@ -10,7 +10,6 @@ async function outfitGenerator(){
     const outfitDiv = document.querySelector('#outfit')
     outfitDiv.innerHTML = ""
     const data = await allClothes.json()
-    console.log(data.length)
     if(data.length === 0) {
         const outfitDiv = document.querySelector('#outfit')
         const outfitMesage = document.createElement('p')
@@ -21,7 +20,6 @@ async function outfitGenerator(){
     var legwear = []
     var chestwear = []
     var footwear = []
-    console.log(data[0].type)
     for (var i = 0; i < data.length; i++) {
        
         if(data[i].type === "chestwear"){
@@ -32,7 +30,6 @@ async function outfitGenerator(){
             footwear.push(data[i])
         }
     }
-    console.log(legwear.length, footwear.length, chestwear.length)
     if(legwear.length === 0) {
         const outfitDiv = document.querySelector('#outfit')
         const outfitMesage = document.createElement('p')
@@ -45,7 +42,7 @@ async function outfitGenerator(){
         outfitMesage.textContent = "You need to have at least 1 of each type to generate a outfit!"
         outfitDiv.appendChild(outfitMesage)
         return
-    } else if(chestwear === 0){
+    } else if(chestwear.length === 0){
         const outfitDiv = document.querySelector('#outfit')
         const outfitMesage = document.createElement('p')
         outfitMesage.textContent = "You need to have at least 1 of each type to generate a outfit!"
@@ -142,7 +139,6 @@ async function saveOutfit(outfitArr)  {
     }) 
     if(response.ok) {
         data = await response.json()
-        console.log(data)
         const outfitContentDiv = document.querySelector("#outfit-content-div")
         outfitContentDiv.remove()
         const outfitDiv = document.querySelector("#outfit")
