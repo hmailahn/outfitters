@@ -38,11 +38,9 @@ async function getAllClothes() {
 async function clothesSearch(event) {
     if(event.target.Id === "toggled") {
         event.target.Id = "untoggled"
-        toggledDiv = document.querySelector("#" + event.target.textContent + "-subdiv")
-        console.log(toggledDiv)
+        toggledDiv = document.querySelector("#" + event.target.textContent + "-contentdiv")
         toggledDiv.remove()
     } else {
-    console.log("button has not been toggled")
     var type = event.target.textContent
     const response  = await fetch('api/clothing/' + type, {
         method: "get",
@@ -51,16 +49,17 @@ async function clothesSearch(event) {
     if(response.ok) {
         const data = await response.json()
         const clothingDiv = document.querySelector("#" + type +"-div")
-        const subDiv = document.createElement("div")
-        console.log(data.length)
+        const clothingDivContent = document.createElement('div')
+        clothingDivContent.id = data[0].type + "-contentdiv"
         if(data.length === 0) {
             const clothingP = document.createElement('p') 
             clothingP.textContent = "No " + type + " Found"
-            subDiv.appendChild(clothingP)
-            subDiv.id = type + "-subdiv"
-            clothingDiv.appendChild(subDiv)
+            clothingDivContent.appendChild(clothingP)
+            clothingDivContent.id = type + "-div"
+            clothingDiv.appendChild(clothingDivContent)
         } else{
         for(var i = 0; i < data.length; i++) {
+        const subDiv = document.createElement("div")
         subDiv.id = data[0].type + "-subdiv"
         const clothingP = document.createElement('p')
         clothingP.textContent = data[i].description
@@ -68,7 +67,8 @@ async function clothesSearch(event) {
         clothingIcon.src = "icons/" + type + ".png"
         subDiv.appendChild(clothingP)
         subDiv.appendChild(clothingIcon)
-        clothingDiv.appendChild(subDiv)
+        clothingDivContent.appendChild(subDiv)
+        clothingDiv.appendChild(clothingDivContent)
         }
     }
         event.target.Id = "toggled";
@@ -77,7 +77,6 @@ async function clothesSearch(event) {
     
 async function deleteItem(event) {
     const id = event.path[0].id
-    console.log(id)
     const response = await fetch('api/clothing/' + id, {
         method: 'delete',
         headers: { 'Content-Type': 'application/json'}

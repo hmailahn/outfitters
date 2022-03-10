@@ -20,24 +20,12 @@ Outfit.init(
         },
         chestwear_id: {
             type: DataTypes.INTEGER,
-            refrences: {
-                model: 'clothing',
-                key: 'id'
-            }
         },
         legwear_id: {
             type: DataTypes.INTEGER,
-            refrences: {
-                model: 'clothing',
-                key: 'id'
-            }
         },
         footwear_id: {
             type: DataTypes.INTEGER,
-            refrences: {
-                model: 'clothing',
-                key: 'id'
-            }
         }
     },
     {
