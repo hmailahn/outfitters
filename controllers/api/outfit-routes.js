@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
     })
 })
 router.post('/', (req, res) => {
-    console.log(req.body.chestwear_id, req.body.legwear_id, req.body.footwear_id,)
     Outfit.create({
         user_id: req.session.user_id,
         chestwear_id: req.body.chestwear_id,
@@ -23,6 +22,17 @@ router.post('/', (req, res) => {
         footwear_id: req.body.footwear_id,
     })
     .then(dbOutfitData => res.json(dbOutfitData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err)
+    })
+})
+router.delete('/', (req, res) => {
+    Outfit.destroy({
+        where: {
+            user_id: req.session.user_id
+        }
+    }).then(dbOutfitData => res.json(dbOutfitData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err)

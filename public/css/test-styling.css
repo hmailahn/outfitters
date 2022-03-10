@@ -1,31 +1,54 @@
 #legwear, #chestwear, #footwear{
-    width: 25%;
+    width: 10%;
+    margin-top: 1%;
 }
-#legwear-div, #chestwear-div, #footwear-div {
-    width: 100%;
+#legwear-div div img, #chestwear-div div img, #footwear-div div img {
+    width: 50%;
+    height: 50%;
+}
+#legwear-contentdiv, #chestwear-contentdiv, #footwear-contentdiv{
     display: flex;
-    flex-wrap: wrap;
 }
-#legwear-div img, #chestwear-div img, #footwear-div img {
+#legwear-contentdiv div, #chestwear-contentdiv div, #footwear-contentdiv div{
     width: 25%;
     height: 25%;
-
 }
-.type-search {
+#type-search {
     width: 100%;
 }
 footer {
     clear: both;
 }
 img{
-    width: 25%;
+    width: 50%;
 }
 #all-clothes div{
-    width: 25%
+    width: 20%;
+    height: 75%;
 }
-
+#all-clothes div p{
+    width: 50%
+}
+#all-clothes button {
+    width: 30%;
+    
+}
 #all-clothes{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+}
+#outfit-btn{
+    margin-top: 1%;
+}
+#outfit-content-div {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+#outfit-content-div button {
+    height: 15%;
+}
+#outfit-content-div img {
+    width: 10%;
 }
