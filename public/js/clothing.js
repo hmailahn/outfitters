@@ -23,7 +23,7 @@ async function getAllClothes() {
         const deleteBtn = document.createElement('button')
         deleteBtn.id = deleteId
         deleteBtn.textContent = "Delete"
-        deleteBtn.className= "DeleteBtn"
+        deleteBtn.className= "DeleteBtn btn btn-primary col-3"
         clothingDiv.appendChild(clothingP)
         clothingDiv.appendChild(clothingIcon)
         deleteBtn.addEventListener('click', deleteItem)
