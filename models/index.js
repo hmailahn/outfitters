@@ -1,14 +1,21 @@
 // import all models
 const User =  require('./User')
 const Clothing = require('./Clothing')
-
-// create associations
+const Outfit = require('./Outfit')
+1// create associations
 User.hasMany(Clothing, {
     foreignKey: 'user_id'
 })
 
 Clothing.belongsTo(User, {
-    foreignKey: 'User_id'
+    foreignKey: 'user_id'
 })
 
-module.exports = { User, Clothing }
+Outfit.belongsTo(User, {
+    foreignKey: "user_id"
+})
+
+User.hasMany(Outfit, {
+    foreignKey: "user_id"
+})
+module.exports = { User, Clothing, Outfit }
