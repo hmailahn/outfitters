@@ -72,6 +72,7 @@ async function getOutfitClothes(legwearId, chestwearId, footwearId) {
     const outfitSaveBtn = document.createElement('button')
     outfitSaveBtn.id = "save-outfit"
     outfitSaveBtn.textContent = "Save Outfit"
+    outfitSaveBtn.className = "Outfitsave-btn btn btn-primary col-3"
     outfitDiv.appendChild(outfitSaveBtn)
     outfitSaveBtn.addEventListener('click', saveOutfit.bind(event, responeArr))
 }
