@@ -10,16 +10,18 @@
 </head>
 
 
-<body class="container-fluids bg-light">
+<body class="container bg-light">
+  {{#if loggedIn}}
+  <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <h1>
+        <h1 class="row">
             <a href="/">Main Menu</a>
         </h1>
-        <a href="/login">
-            <button type="button" class="btn btn-primary" id="login">Log In </button>
-        </a>
-        <button type="button" class="btn btn-primary" id="logout">Log Out</button>
+        <button type="button" class="btn btn-primary row" id="logout">Log Out</button>
     </nav>
+    </header>
+    {{/if}}
+
     <main>
         {{{ body }}}
     </main>
