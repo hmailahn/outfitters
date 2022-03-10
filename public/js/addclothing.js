@@ -3,12 +3,26 @@ async function clothesSubmit(event) {
     event.stopPropagation();
     const description = document.querySelector("#description").value
     const type = document.querySelector("#Type").value
+    const submitDiv = document.querySelector("#submit-message")
+    const success = document.createElement("p")
+        if(submitDiv.innerHTML === ""){
+        success.textContent = description + " has been added to your wardrobe"
+        } else{
+            submitDiv.innerHTML = ""
+            success.textContent = description + " has been added to your wardrobe"
+        }
     if(description === ''){
-        console.log("No description given")
+        const alertDiv = document.querySelector("#submit-message")
+        const alertP = document.createElement('p')
+        alertP.textContent = "Please Fill out Both parts of the form"
+        alertDiv.appendChild(alertP)
         return
     }
     if(type === "Type-Select"){
-        console.log("No Type Selected")
+        const alertDiv = document.querySelector("#submit-message")
+        const alertP = document.createElement('p')
+        alertP.textContent = "Please Fill out Both parts of the form"
+        alertDiv.appendChild(alertP)
         return
     }
     const response = await fetch('api/clothing', {
@@ -20,19 +34,11 @@ async function clothesSubmit(event) {
         headers: { 'Content-Type': 'application/json'}
     })
     if (response.ok){
-        const success = document.createElement("p")
-        const successDiv = document.querySelector("#submit-success")
-        if(successDiv.innerHTML === ""){
-        success.textContent = description + " has been added to your wardrobe"
-        } else{
-            successDiv.innerHTML = ""
-            success.textContent = description + " has been added to your wardrobe"
-        }
         descriptionReset = document.querySelector("#description")
         typeReset = document.querySelector("#Type")
         descriptionReset.value = ""
         typeReset.selectedIndex = 0
-        successDiv.appendChild(success)
+        submitDiv.appendChild(success)
         return descriptionReset, typeReset
     } else {
         console.log("you're really dumb huh")

@@ -38,7 +38,8 @@ async function getAllClothes() {
 async function clothesSearch(event) {
     if(event.target.Id === "toggled") {
         event.target.Id = "untoggled"
-        toggledDiv = document.querySelector("#" + event.target.textContent + "-contentdiv")
+        toggledDiv = document.querySelector("#" + event.target.id + "-contentdiv")
+        console.log(event.target.id)
         toggledDiv.remove()
     } else {
     var type = event.target.id
@@ -54,7 +55,7 @@ async function clothesSearch(event) {
             const clothingP = document.createElement('p') 
             clothingP.textContent = "No " + type + " Found"
             clothingDivContent.appendChild(clothingP)
-            clothingDivContent.id = type + "-div"
+            clothingDivContent.id = type + "-contentdiv"
             clothingDiv.appendChild(clothingDivContent)
         } else{
         clothingDivContent.id = data[0].type + "-contentdiv"
