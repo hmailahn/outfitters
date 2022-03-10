@@ -36,8 +36,8 @@ async function getAllClothes() {
 }
 
 async function clothesSearch(event) {
-    if(event.target.className === "toggled") {
-        event.target.className = "untoggled"
+    if(event.target.Id === "toggled") {
+        event.target.Id = "untoggled"
         toggledDiv = document.querySelector("#" + event.target.textContent + "-subdiv")
         console.log(toggledDiv)
         toggledDiv.remove()
@@ -50,9 +50,16 @@ async function clothesSearch(event) {
     })
     if(response.ok) {
         const data = await response.json()
-        console.log(data)
         const clothingDiv = document.querySelector("#" + type +"-div")
         const subDiv = document.createElement("div")
+        console.log(data.length)
+        if(data.length === 0) {
+            const clothingP = document.createElement('p') 
+            clothingP.textContent = "No " + type + " Found"
+            subDiv.appendChild(clothingP)
+            subDiv.id = type + "-subdiv"
+            clothingDiv.appendChild(subDiv)
+        } else{
         for(var i = 0; i < data.length; i++) {
         subDiv.id = data[0].type + "-subdiv"
         const clothingP = document.createElement('p')
@@ -63,7 +70,8 @@ async function clothesSearch(event) {
         subDiv.appendChild(clothingIcon)
         clothingDiv.appendChild(subDiv)
         }
-        event.target.className = "toggled";
+    }
+        event.target.Id = "toggled";
     }
     }}
     
