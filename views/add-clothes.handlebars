@@ -10,13 +10,13 @@
  <a href="/viewclothes">
   <button class="btn btn-primary col-2">View Wardrobe</button>
   </a>
-<h2>Clothes:</h2>
+<h2 class="mt-2 mb-2">Clothes:</h2>
 <form class="Clothes">
-    <div>
+    <div class="p-1">
         <label for="description">Description:</label>
-        <input type="text" id="description"/>
+        <input type="text" placeholder="clothing description" id="description"/>
     </div>
-    <div>
+    <div class="p-1">
         <label for="Type">Type:</label>
         <select id="Type" name="Type" value="Select Item">
             <option value="Type-Select" selected>Please Select A Type</option>
@@ -25,7 +25,7 @@
             <option value="Footwear">Footwear</option>
         </select>
     </div>
-    <button class="btn btn-primary col-2" id="clothing">Add Clothing Item</button>
+    <button class="btn btn-primary col-2 mt-2" id="clothing">Add Clothing Item</button>
 </form>
 <script src="js/logout.js"></script>
 <script src="js/addclothing.js"></script>
