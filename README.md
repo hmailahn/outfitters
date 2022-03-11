@@ -10,8 +10,9 @@ Outfitters is a full stack application that will allow a user to create an accou
 <li> MySQL </li>
 <li> BCrypt </li>
 <li> Handlebars.js </li>
-<li> Perfect-scrollbar </li>
+<li> Ionicons </li>
 <li> Heroku </li>
+
 
 
 ## Screenshot
