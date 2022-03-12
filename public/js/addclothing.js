@@ -35,7 +35,10 @@ async function clothesSubmit(event) {
         successDiv.appendChild(success)
         return descriptionReset, typeReset
     } else {
-        console.log("you're really dumb huh")
+        const success = document.createElement("p")
+        const successDiv = document.querySelector("#submit-success")
+        success.textContent = "failed request"
+        successDiv.appendChild(success)
     }
 }
 document.querySelector('#clothing').addEventListener('click', clothesSubmit)
