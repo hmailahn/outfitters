@@ -13,9 +13,8 @@ async function loginFormSubmitHandler(event) {
             }),
             headers: { 'Content-type': 'application/json'}
         })
-        
         if(response.ok){
-            document.location.replace('/login')
+            document.location.replace('/')
         } else{
             const data = await response.json()
             if(data.message == "No user with that username!") {

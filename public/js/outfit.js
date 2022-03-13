@@ -10,7 +10,6 @@ async function outfitGenerator(){
     const outfitDiv = document.querySelector('#outfit')
     outfitDiv.innerHTML = ""
     const data = await allClothes.json()
-    console.log(data.length)
     if(data.length === 0) {
         const outfitDiv = document.querySelector('#outfit')
         const outfitMesage = document.createElement('p')
@@ -21,7 +20,6 @@ async function outfitGenerator(){
     var legwear = []
     var chestwear = []
     var footwear = []
-    console.log(data[0].type)
     for (var i = 0; i < data.length; i++) {
        
         if(data[i].type === "chestwear"){
@@ -32,7 +30,6 @@ async function outfitGenerator(){
             footwear.push(data[i])
         }
     }
-    console.log(legwear.length, footwear.length, chestwear.length)
     if(legwear.length === 0) {
         const outfitDiv = document.querySelector('#outfit')
         const outfitMesage = document.createElement('p')
@@ -142,7 +139,6 @@ async function saveOutfit(outfitArr)  {
     }) 
     if(response.ok) {
         data = await response.json()
-        console.log(data)
         const outfitContentDiv = document.querySelector("#outfit-content-div")
         outfitContentDiv.remove()
         const outfitDiv = document.querySelector("#outfit")
@@ -150,24 +146,93 @@ async function saveOutfit(outfitArr)  {
         savedOutfitp.textContent = "Outfit #" + data.id + " has been saved" 
         outfitDiv.appendChild(savedOutfitp) 
     }
+    document.location.reload()
 }
 async function getOutfits() {
-    const response = await fetch("/api/outfits", {
+    const outfitResponse = await fetch("/api/outfits", {
         method: "get",
         headers: {
             'Content-Type': 'application/json'
         }
     })
-    const data = await response.json()
+    const outfitsArray = []
+    const data = await outfitResponse.json()
+    for(var i = 0;i < data.length; i++) {
+        const outfit = []
+        const chestwear_id = data[i].chestwear_id
+        const legwear_id = data[i].legwear_id
+        const footwear_id = data[i].footwear_id
+        const outfit_id = data[i].id
+        outfit.push(outfit_id, chestwear_id, legwear_id, footwear_id)
+        outfitsArray.push(outfit)
+    }
+    const outfitsDataArray = []
+    for(var i =0; i<outfitsArray.length; i++) {
+        var outfit = []
+        var outfit_id = outfitsArray[i][0]
+        outfit.push(outfit_id)
+        for(var n = 1; n < outfitsArray[i].length; n++){
+            const id = outfitsArray[i][n]
+            const clothesResponse = await fetch("/api/clothing/" + id, {
+                method: "get",
+                headers: { 'Content-Type': 'application/json'}
+            })
+            const clothesData = await clothesResponse.json()
+            outfit.push(clothesData[0])
+        }
+        outfitsDataArray.push(outfit)
+    }
+    const savedOutfitsDiv = document.querySelector("#saved-outfits")
+    for(var i = 0; i < outfitsDataArray.length; i++){
+        const outfit = outfitsDataArray[i]
+        const outfitDiv = document.createElement('div')
+        const outfitIdP = document.createElement('p')
+        const outfit_id = outfitsDataArray[i][0]
+        outfitIdP.textContent = "Outfit #" + outfit_id
+        outfitDiv.appendChild(outfitIdP)
+        const outfitDeleteBtn = document.createElement('button')
+        outfitDeleteBtn.id = outfit_id
+        outfitDiv.className = outfit_id
+        outfitDeleteBtn.textContent = "Delete Outfit"
+        outfitDeleteBtn.className = "DeleteBtn btn btn-primary col-3"
+        outfitDeleteBtn.addEventListener('click', deleteOutfit)
+        for(var n = 1; n< outfit.length; n++){
+            if(outfit[n] === undefined){
+                const itemP = document.createElement('p')
+                const itemDiv = document.createElement('div')
+                itemP.textContent = "This Item has been deleted"
+                itemDiv.appendChild(itemP)
+                outfitDiv.appendChild(itemDiv)
+            }else {
+            const itemDiv = document.createElement('div')
+            const itemP = document.createElement('p')
+            const itemIcon = document.createElement('img')
+            const itemDescription = outfit[n].description
+            itemP.textContent = itemDescription
+            const itemType = outfit[n].type
+            itemIcon.src = "icons/" + itemType + ".png"
+            itemDiv.appendChild(itemP)
+            itemDiv.appendChild(itemIcon)
+            outfitDiv.appendChild(itemDiv)
+            }
+        }
+        outfitDiv.appendChild(outfitDeleteBtn)
+        savedOutfitsDiv.appendChild(outfitDiv)
+    }
 }
-// async function deleteOutfits() {
-//     const response = await fetch("api/outfits", {
-//         method: "delete",
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-// }
-// deleteOutfits()
+async function deleteOutfit(event) {
+    const outfit_id = event.target.id
+    const outfitDiv = document.getElementsByClassName(outfit_id)
+    const deletedOutfitResponse = document.createElement('p')
+    deletedOutfitResponse.textContent = "Outfit #" + outfit_id + " has been deleted"
+    outfitDiv[0].innerHTML = ''
+    outfitDiv[0].appendChild(deletedOutfitResponse)
+    const response = await fetch("api/outfits/" + outfit_id, {
+        method: "delete",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
 getOutfits()
 document.querySelector("#outfit-btn").addEventListener('click', outfitGenerator)
