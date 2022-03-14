@@ -16,7 +16,7 @@ Outfitters is a full stack application that will allow a user to create an accou
 
 
 ## Screenshot
-<!-- Placeholder value -->
+![image](assets/images/Outfitters.PNG)
 
 ## GitHub Repository
 https://github.com/hmailahn/outfitters 
