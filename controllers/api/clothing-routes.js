@@ -21,7 +21,6 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
       });
 });
-
 ///trying to get just shirts for user, not sure how to go about it - recieivng an error rn
 router.get('/chestwear', withAuth, (req, res) => {   
     if (req.session) {

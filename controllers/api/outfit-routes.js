@@ -27,10 +27,11 @@ router.post('/', (req, res) => {
         res.status(500).json(err)
     })
 })
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
     Outfit.destroy({
         where: {
-            user_id: req.session.user_id
+            user_id: req.session.user_id,
+            id: req.params.id
         }
     }).then(dbOutfitData => res.json(dbOutfitData))
     .catch(err => {

@@ -52,3 +52,8 @@ img{
 #outfit-content-div img {
     width: 10%;
 }
+#saved-outfits{
+    float: right;
+    display: flex;
+    justify-content: space-evenly;
+}
